@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Wedlocked In - a Reddit stories podcast about relationships, marriage and parenting</title>
+  <meta name="description" content="Ella and Martin read wild Reddit stories about marriage, parenting and relationships, and share their unfiltered opinions. Funny, relatable, and just the right amount of drama.">
+
+  <!-- Open Graph: what shows when the link is shared. og:url needs the real
+       domain once there is one - left off deliberately rather than pointing
+       somewhere wrong. -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Wedlocked In - wild Reddit stories, unfiltered opinions">
+  <meta property="og:description" content="Ella and Martin read wild Reddit stories about marriage, parenting and relationships. Funny, relatable, and just the right amount of drama.">
+  <meta property="og:image" content="images/og-image.jpg">
+
+  <link rel="icon" type="image/png" href="images/mark.png">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+  <!-- Fonts: Anton (poster display), Space Grotesk (labels/buttons), Inter (body).
+       This same link is in privacy.html and 404.html - change all three together. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- ============ STICKY HEADER ============
+       Social links taken from the show notes in the RSS feed. The tracking
+       parameters Podbean and the apps append to share links (?_t=, ?igsh=)
+       have been stripped - they are session identifiers, they expire, and
+       they do not belong in a permanent link. -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="#top">
+        <img src="images/mark.png" alt="" class="brand-logo">
+        <span class="brand-name">Wedlocked In</span>
+      </a>
+      <nav class="site-nav" aria-label="Main navigation">
+        <a href="#listen">Listen</a>
+        <a href="#episodes">Episodes</a>
+        <a href="#start-here">Start here</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <div class="social-row" aria-label="Follow the show">
+        <a class="social-btn" href="https://www.youtube.com/@WedlockedInPod" rel="noopener" aria-label="YouTube"><i class="fa-brands fa-youtube" aria-hidden="true"></i></a>
+        <a class="social-btn" href="https://www.instagram.com/wedlocked.in.podcast" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a>
+        <a class="social-btn" href="https://www.tiktok.com/@wedlocked.in.podcast" rel="noopener" aria-label="TikTok"><i class="fa-brands fa-tiktok" aria-hidden="true"></i></a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- ============ HERO ============ -->
+    <section class="hero" id="top">
+      <div class="hero-inner">
+        <div class="hero-art reveal">
+          <img src="images/cover.jpg" alt="Wedlocked In cover art" width="1200" height="1200">
+        </div>
+        <div class="hero-copy">
+          <p class="eyebrow reveal">Society &amp; Culture &middot; Relationships</p>
+          <h1 class="reveal">Wedlocked In</h1>
+          <p class="hero-pitch reveal">Ella and Martin read wild Reddit stories about marriage, parenting and relationships, and share their unfiltered opinions. Funny, relatable, and just the right amount of drama.</p>
+
+          <!-- TRUST STRIP - facts taken from the RSS feed.
+               The schedule segment is commented out rather than deleted:
+               the feed says "New episodes every Friday", but the last
+               episode was September 2025, so claiming it in the present
+               tense would be untrue. Uncomment it if the show returns. -->
+          <p class="trust-strip reveal">
+            <span>Reddit stories, unfiltered</span> &middot;
+            <span>6 episodes</span> &middot;
+            <span>Around 80 minutes each</span> &middot;
+            <span>Hosted by Ella Samuel and Martin Pearson</span>
+            <!-- &middot; <span>New episodes every Friday</span> -->
+          </p>
+
+          <!-- LISTEN-ON ROW - the primary conversion.
+               Pocket Casts deleted (the show is not listed there).
+               These links are repeated in the footer - keep both in sync. -->
+          <div class="listen-on-row reveal" id="listen-on" aria-label="Listen on your podcast app">
+            <a class="platform-btn" href="https://open.spotify.com/show/6NbphaKHUdIZO1x6evVEIi" rel="noopener"><i class="fa-brands fa-spotify" aria-hidden="true"></i><span>Spotify</span></a>
+            <a class="platform-btn" href="https://podcasts.apple.com/us/podcast/wedlocked-in/id1827232518" rel="noopener"><i class="fa-brands fa-apple" aria-hidden="true"></i><span>Apple Podcasts</span></a>
+            <a class="platform-btn" href="https://www.youtube.com/@WedlockedInPod" rel="noopener"><i class="fa-brands fa-youtube" aria-hidden="true"></i><span>YouTube</span></a>
+            <a class="platform-btn" href="https://music.amazon.com/podcasts/4f1577e0-359e-4b00-a4b1-56ff16d972d1" rel="noopener"><i class="fa-brands fa-amazon" aria-hidden="true"></i><span>Amazon Music</span></a>
+            <a class="platform-btn" href="https://wedlockedinpodcast.podbean.com" rel="noopener"><i class="fa-solid fa-podcast" aria-hidden="true"></i><span>Podbean</span></a>
+            <a class="platform-btn" href="https://feed.podbean.com/wedlockedinpodcast/feed.xml" rel="noopener"><i class="fa-solid fa-rss" aria-hidden="true"></i><span>RSS</span></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="soundbar" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+
+    <!-- ============ FEATURED PLAYER ============
+         NATIVE AUDIO MODE. The MP3 below is loaded straight from Podbean's
+         media server (mcdn.podbean.com), which is the same file the podcast
+         apps play. Nothing third-party runs on the page, so no cookies are
+         set and no cookie banner is needed.
+
+         Every URL here came out of the RSS feed at
+         https://feed.podbean.com/wedlockedinpodcast/feed.xml - each episode
+         has an <enclosure url="..."> line, and that is the direct MP3.
+
+         IF PLAYBACK FAILS: some hosts refuse to serve audio to pages on
+         other domains. Open the MP3 URL in a plain Chrome tab to check.
+         If Chrome plays it, the site will too. -->
+    <section class="section listen-section" id="listen">
+      <div class="section-inner">
+        <p class="eyebrow reveal">Latest episode</p>
+        <div class="player-card reveal">
+          <p class="player-epnum" id="player-epnum">Episode 6</p>
+          <h2 class="player-title" id="player-title">CULT-urally Questionable</h2>
+          <p class="player-meta">19 September 2025 &middot; 1 hr 25 min</p>
+          <p class="player-desc">Some cults have more followers than others, but they're all as insane and as awful as each other, right?</p>
+
+          <audio controls preload="none" id="featured-player" src="https://mcdn.podbean.com/mf/web/6anmkmhst4axkein/Episode6Version1.mp3">
+            Your browser does not support the audio element.
+            <a href="https://open.spotify.com/show/6NbphaKHUdIZO1x6evVEIi" rel="noopener">Listen on Spotify instead</a>.
+          </audio>
+
+          <p class="player-alt">Prefer your own app? <a href="#listen-on">Pick a platform above</a>, or listen on <a href="https://open.spotify.com/show/6NbphaKHUdIZO1x6evVEIi" rel="noopener">Spotify</a> or <a href="https://podcasts.apple.com/us/podcast/wedlocked-in/id1827232518" rel="noopener">Apple Podcasts</a>.</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="soundbar" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+
+    <!-- ============ EPISODES ============
+         All six episodes, newest first. Everything here is taken from the
+         RSS feed, so it matches what the podcast apps show.
+         The "Show notes" link goes to each episode's Podbean page, which
+         carries the links to the Reddit threads discussed.
+         To add an episode: copy one complete <li> block (marked below),
+         paste it at the TOP of the list, edit the details, redeploy. -->
+    <section class="section" id="episodes">
+      <div class="section-inner">
+        <p class="eyebrow reveal">Episodes</p>
+        <h2 class="reveal">All six episodes</h2>
+        <ul class="episode-list">
+
+          <!-- ===== ONE COMPLETE EPISODE ROW - copy from here... ===== -->
+          <li class="episode-row reveal">
+            <img class="episode-thumb" src="images/episode-thumb.jpg" alt="" width="400" height="400">
+            <div class="episode-body">
+              <h3>6. CULT-urally Questionable</h3>
+              <p class="episode-meta">19 September 2025 &middot; 1 hr 25 min</p>
+              <p class="episode-desc">Some cults have more followers than others, but they're all as insane and as awful as each other, right?</p>
+              <div class="episode-links">
+                <button class="episode-listen" type="button" data-audio-src="https://mcdn.podbean.com/mf/web/6anmkmhst4axkein/Episode6Version1.mp3" data-episode-title="CULT-urally Questionable" data-episode-number="Episode 6"><i class="fa-solid fa-play" aria-hidden="true"></i> Listen</button>
+                <a class="episode-notes" href="https://wedlockedinpodcast.podbean.com/e/episode-6/" rel="noopener">Show notes</a>
+              </div>
+            </div>
+          </li>
+          <!-- ===== ...to here. That is one complete row. ===== -->
+
+          <li class="episode-row reveal">
+            <img class="episode-thumb" src="images/episode-thumb.jpg" alt="" width="400" height="400">
+            <div class="episode-body">
+              <h3>5. Deceit, Served with a Side of Drama</h3>
+              <p class="episode-meta">12 September 2025 &middot; 1 hr 23 min</p>
+              <p class="episode-desc">This week it's cheaters, the worst kind of people. Cheating on your wife while she cares for her dying mother. There's a special place for that, surely.</p>
+              <div class="episode-links">
+                <button class="episode-listen" type="button" data-audio-src="https://mcdn.podbean.com/mf/web/z7gt4hfudir8k26j/Episode5Version1.mp3" data-episode-title="Deceit, Served with a Side of Drama" data-episode-number="Episode 5"><i class="fa-solid fa-play" aria-hidden="true"></i> Listen</button>
+                <a class="episode-notes" href="https://wedlockedinpodcast.podbean.com/e/ep5-cheating/" rel="noopener">Show notes</a>
+              </div>
+            </div>
+          </li>
+
+          <li class="episode-row reveal">
+            <img class="episode-thumb" src="images/episode-thumb.jpg" alt="" width="400" height="400">
+            <div class="episode-body">
+              <h3>4. Justified Reaction or Just Too Far?</h3>
+              <p class="episode-meta">22 August 2025 &middot; 1 hr 20 min</p>
+              <p class="episode-desc">Sending your spouse anonymous STD notifications, and shaving your head in support of a family member with cancer.</p>
+              <div class="episode-links">
+                <button class="episode-listen" type="button" data-audio-src="https://mcdn.podbean.com/mf/web/6e9juj9wtx4fcqqu/Episode4Version1.mp3" data-episode-title="Justified Reaction or Just Too Far?" data-episode-number="Episode 4"><i class="fa-solid fa-play" aria-hidden="true"></i> Listen</button>
+                <a class="episode-notes" href="https://wedlockedinpodcast.podbean.com/e/aita-episode-4/" rel="noopener">Show notes</a>
+              </div>
+            </div>
+          </li>
+
+          <li class="episode-row reveal">
+            <img class="episode-thumb" src="images/episode-thumb.jpg" alt="" width="400" height="400">
+            <div class="episode-body">
+              <h3>3. You Can't Spell Wedding Without WTF...</h3>
+              <p class="episode-meta">1 August 2025 &middot; 1 hr 21 min</p>
+              <p class="episode-desc">Interfering siblings and shaving a dog to fit an ocean-themed wedding. Some odd requests, to say the least, on this wedding-themed episode.</p>
+              <div class="episode-links">
+                <button class="episode-listen" type="button" data-audio-src="https://mcdn.podbean.com/mf/web/qb3tzcx9x38cqxy5/Episode3Version1.mp3" data-episode-title="You Can't Spell Wedding Without WTF..." data-episode-number="Episode 3"><i class="fa-solid fa-play" aria-hidden="true"></i> Listen</button>
+                <a class="episode-notes" href="https://wedlockedinpodcast.podbean.com/e/aita-for-considering-cancelling-the-wedding-after-what-my-sibling-said-episode-3/" rel="noopener">Show notes</a>
+              </div>
+            </div>
+          </li>
+
+          <li class="episode-row reveal">
+            <img class="episode-thumb" src="images/episode-thumb.jpg" alt="" width="400" height="400">
+            <div class="episode-body">
+              <h3>2. He's a Creep, He's a Weirdo... and He's on Reddit</h3>
+              <p class="episode-meta">25 July 2025 &middot; 1 hr 13 min</p>
+              <p class="episode-desc">Imagine finding an AI nude of your sister on your husband's phone. This week it's all about the creeps of the internet.</p>
+              <div class="episode-links">
+                <button class="episode-listen" type="button" data-audio-src="https://mcdn.podbean.com/mf/web/2trae2zdti4yz6dr/Episode2Version1.mp3" data-episode-title="He's a Creep, He's a Weirdo... and He's on Reddit" data-episode-number="Episode 2"><i class="fa-solid fa-play" aria-hidden="true"></i> Listen</button>
+                <a class="episode-notes" href="https://wedlockedinpodcast.podbean.com/e/my-husband-made-an-ai-nude-of-my-sister/" rel="noopener">Show notes</a>
+              </div>
+            </div>
+          </li>
+
+          <li class="episode-row reveal">
+            <img class="episode-thumb" src="images/episode-thumb.jpg" alt="" width="400" height="400">
+            <div class="episode-body">
+              <h3>1. AITA for Not Attending My Brother &amp; Sister's Wedding?</h3>
+              <p class="episode-meta">17 July 2025 &middot; 1 hr 28 min</p>
+              <p class="episode-desc">Not attending your brother and sister's wedding. Not telling someone they're about to sit in dog poo. Kicking small children in the face.</p>
+              <div class="episode-links">
+                <button class="episode-listen" type="button" data-audio-src="https://mcdn.podbean.com/mf/web/76itfd3ei55n4xd7/Episode1-150725.mp3" data-episode-title="AITA for Not Attending My Brother &amp; Sister's Wedding?" data-episode-number="Episode 1"><i class="fa-solid fa-play" aria-hidden="true"></i> Listen</button>
+                <a class="episode-notes" href="https://wedlockedinpodcast.podbean.com/e/aita-for-not-attending-my-brother-sisters-wedding-1/" rel="noopener">Show notes</a>
+              </div>
+            </div>
+          </li>
+
+        </ul>
+
+        <!-- With only six episodes, the site genuinely does list them all,
+             so this line points at the apps rather than claiming there is
+             more here. If the show ever passes about ten episodes, trim
+             this list back to six and let the platforms hold the archive. -->
+        <p class="full-archive reveal">Every episode is also on <a href="https://open.spotify.com/show/6NbphaKHUdIZO1x6evVEIi" rel="noopener">Spotify</a> and <a href="https://podcasts.apple.com/us/podcast/wedlocked-in/id1827232518" rel="noopener">Apple Podcasts</a>.</p>
+      </div>
+    </section>
+
+    <div class="soundbar" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+
+    <!-- ============ START HERE ============
+         Three entry points for someone who has never heard the show.
+         Picked to spread across the run rather than cluster. -->
+    <section class="section start-here-section" id="start-here">
+      <div class="section-inner">
+        <p class="eyebrow reveal">New here?</p>
+        <h2 class="reveal">Start with one of these</h2>
+        <div class="start-grid">
+          <div class="start-card reveal">
+            <p class="start-label">Start at the start</p>
+            <h3>1. AITA for Not Attending My Brother &amp; Sister's Wedding?</h3>
+            <p>The one that set the tone: a family wedding nobody wanted to attend, and two other stories that go somewhere much stranger.</p>
+            <a class="start-listen" href="#episodes">Find it below <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+          </div>
+          <div class="start-card reveal">
+            <p class="start-label">Peak wedding chaos</p>
+            <h3>3. You Can't Spell Wedding Without WTF...</h3>
+            <p>Interfering siblings and a dog shaved to match an ocean theme. If you only want the wedding ones, it is this one.</p>
+            <a class="start-listen" href="#episodes">Find it below <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+          </div>
+          <div class="start-card reveal">
+            <p class="start-label">The one that got a reaction</p>
+            <h3>2. He's a Creep, He's a Weirdo... and He's on Reddit</h3>
+            <p>An hour on the internet's worst behaviour, opening with a story that has to be heard to be believed.</p>
+            <a class="start-listen" href="#episodes">Find it below <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="soundbar" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+
+    <!-- ============ ABOUT ============
+         DRAFT COPY - written from the feed description and the episodes,
+         not supplied by you. Read it and rewrite anything that is not true.
+         Photo slot is ready below when you have one of the two of you. -->
+    <section class="section about-band" id="about">
+      <div class="section-inner">
+        <!-- Single column while there is no host photo. When you have one,
+             save it as images/host.jpg, remove the "about-grid-textonly"
+             class here, and uncomment the photo block below the text. -->
+        <div class="about-grid about-grid-textonly">
+          <div class="about-text">
+            <p class="eyebrow reveal">About the show</p>
+            <h2 class="reveal">Two people, one sofa, and the worst of the internet</h2>
+            <p class="reveal">Every episode, Ella and Martin dig through Reddit for the stories that make you put your phone down and say "no, surely not". Weddings that went wrong, families behaving badly, cheaters, creeps, and one full episode on cults.</p>
+            <p class="reveal">They are engaged, which means the relationship verdicts are delivered by two people actively living through wedding planning. Opinions are unfiltered and not always the same, which is rather the point.</p>
+            <p class="reveal">Six episodes, roughly eighty minutes each, with every Reddit thread linked in the show notes so you can go and read the comments yourself.</p>
+          </div>
+          <!--
+          <div class="about-photo reveal">
+            <img src="images/host.jpg" alt="Ella Samuel and Martin Pearson, hosts of Wedlocked In" width="900" height="1100">
+          </div>
+          -->
+        </div>
+      </div>
+    </section>
+
+    <div class="soundbar" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+
+    <!-- ============ CONTACT ============
+         Netlify Forms. This will NOT work in Live Server - submitting
+         locally always shows the error message. That is expected. It only
+         works once the site is deployed to Netlify. -->
+    <section class="section contact-band" id="contact">
+      <div class="section-inner">
+        <div class="contact-grid">
+          <div class="contact-form-col">
+            <p class="eyebrow reveal">Get in touch</p>
+            <h2 class="reveal">Got a story?</h2>
+            <p class="reveal">Send us the one you cannot stop thinking about, pitch yourself as a guest, or just tell us we got one wrong.</p>
+
+            <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" id="contact-form" class="reveal">
+              <input type="hidden" name="form-name" value="contact">
+              <p class="hp-field" aria-hidden="true">
+                <label>Do not fill this in: <input name="bot-field" tabindex="-1" autocomplete="off"></label>
+              </p>
+
+              <div class="form-field">
+                <label for="contact-name">Your name</label>
+                <input type="text" id="contact-name" name="name" required autocomplete="name">
+              </div>
+              <div class="form-field">
+                <label for="contact-email">Your email</label>
+                <input type="email" id="contact-email" name="email" required autocomplete="email">
+              </div>
+              <div class="form-field">
+                <label for="contact-reason">What is it about?</label>
+                <select id="contact-reason" name="reason">
+                  <option>A story for the show</option>
+                  <option>Listener question</option>
+                  <option>Guest pitch</option>
+                  <option>Sponsorship</option>
+                  <option>Something else</option>
+                </select>
+              </div>
+              <div class="form-field">
+                <label for="contact-message">Your message</label>
+                <textarea id="contact-message" name="message" rows="5" required></textarea>
+              </div>
+              <button type="submit" class="btn-primary" id="contact-submit">Send message</button>
+              <p id="form-status" role="status" aria-live="polite"></p>
+            </form>
+          </div>
+
+          <div class="contact-details-col reveal">
+            <h3>Or reach us directly</h3>
+            <p><a class="contact-email-link" href="mailto:wedlockedinpodcast@gmail.com"><i class="fa-solid fa-envelope" aria-hidden="true"></i> wedlockedinpodcast@gmail.com</a></p>
+            <div class="social-row" aria-label="Follow the show">
+              <a class="social-btn" href="https://www.youtube.com/@WedlockedInPod" rel="noopener" aria-label="YouTube"><i class="fa-brands fa-youtube" aria-hidden="true"></i></a>
+              <a class="social-btn" href="https://www.instagram.com/wedlocked.in.podcast" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a>
+              <a class="social-btn" href="https://www.tiktok.com/@wedlocked.in.podcast" rel="noopener" aria-label="TikTok"><i class="fa-brands fa-tiktok" aria-hidden="true"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============ FOOTER ============
+       Listen-on row repeated. KEEP IN SYNC with the hero row.
+       No limited-company line: this is two individuals.
+       No Cookie settings link: native audio mode sets no cookies. -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <p class="footer-brand">Wedlocked In</p>
+
+      <div class="listen-on-row listen-on-compact" aria-label="Listen on your podcast app">
+        <a class="platform-btn" href="https://open.spotify.com/show/6NbphaKHUdIZO1x6evVEIi" rel="noopener"><i class="fa-brands fa-spotify" aria-hidden="true"></i><span>Spotify</span></a>
+        <a class="platform-btn" href="https://podcasts.apple.com/us/podcast/wedlocked-in/id1827232518" rel="noopener"><i class="fa-brands fa-apple" aria-hidden="true"></i><span>Apple Podcasts</span></a>
+        <a class="platform-btn" href="https://www.youtube.com/@WedlockedInPod" rel="noopener"><i class="fa-brands fa-youtube" aria-hidden="true"></i><span>YouTube</span></a>
+        <a class="platform-btn" href="https://music.amazon.com/podcasts/4f1577e0-359e-4b00-a4b1-56ff16d972d1" rel="noopener"><i class="fa-brands fa-amazon" aria-hidden="true"></i><span>Amazon Music</span></a>
+        <a class="platform-btn" href="https://wedlockedinpodcast.podbean.com" rel="noopener"><i class="fa-solid fa-podcast" aria-hidden="true"></i><span>Podbean</span></a>
+        <a class="platform-btn" href="https://feed.podbean.com/wedlockedinpodcast/feed.xml" rel="noopener"><i class="fa-solid fa-rss" aria-hidden="true"></i><span>RSS</span></a>
+      </div>
+
+      <div class="social-row" aria-label="Follow the show">
+        <a class="social-btn" href="https://www.youtube.com/@WedlockedInPod" rel="noopener" aria-label="YouTube"><i class="fa-brands fa-youtube" aria-hidden="true"></i></a>
+        <a class="social-btn" href="https://www.instagram.com/wedlocked.in.podcast" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a>
+        <a class="social-btn" href="https://www.tiktok.com/@wedlocked.in.podcast" rel="noopener" aria-label="TikTok"><i class="fa-brands fa-tiktok" aria-hidden="true"></i></a>
+      </div>
+
+      <p class="footer-copy">&copy; <span id="footer-year">2026</span> Wedlocked In. <a href="privacy.html">Privacy</a></p>
+    </div>
+  </footer>
+
+  <!-- ============ MOBILE LISTEN BAR ============
+       Phones only. Spotify is the second button - swap if Apple or
+       YouTube turns out to be the bigger audience. -->
+  <div class="mobile-listen-bar">
+    <a class="btn-primary" href="#listen"><i class="fa-solid fa-play" aria-hidden="true"></i> Listen now</a>
+    <a class="platform-btn" href="https://open.spotify.com/show/6NbphaKHUdIZO1x6evVEIi" rel="noopener"><i class="fa-brands fa-spotify" aria-hidden="true"></i><span>Spotify</span></a>
+  </div>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
