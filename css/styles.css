@@ -1,0 +1,943 @@
+/* ==========================================================================
+   WEDLOCKED IN - built from the "On Air" podcast starter kit
+   ==========================================================================
+
+   HOW THIS FILE WORKS
+   1. CLIENT TOKENS below are the ONLY place hex colours appear. Change
+      those values and the whole site re-skins itself - including the
+      soundbars, platform buttons and the cover-art glow.
+   2. Everything else is DERIVED from the tokens using color-mix(), which
+      blends two colours by percentage - like mixing paint.
+
+   COLOURS: sampled directly out of the cover artwork, so the site and the
+   artwork are literally the same palette rather than an approximation.
+   Lime is the accent because black-on-lime is the highest-contrast pairing
+   in the artwork - the coral is used sparingly as a second accent so the
+   page has the artwork's energy without two colours fighting for the CTAs.
+   ========================================================================== */
+
+/* ===================== CLIENT TOKENS - EDIT THESE ====================== */
+:root {
+  --color-primary: #291141;    /* raised surfaces: cards, the player, header fill */
+  --color-secondary: #F878CD;  /* the artwork's pink - muted text base, quiet borders */
+  --color-accent: #9CEB42;     /* the artwork's lime - buttons, links, soundbars */
+  --color-accent-alt: #F74E47; /* the artwork's coral - second accent, used sparingly */
+  --color-bg: #190826;         /* deep aubergine, pulled from the artwork's purple */
+  --color-text: #F6EDFB;       /* off-white with a violet cast */
+  --color-on-accent: #12061C;  /* text ON accent buttons. Black-on-lime is about 13:1,
+                                  comfortably AAA - if the accent ever changes to
+                                  something darker, this must go light instead */
+
+  --font-display: 'Anton', sans-serif;          /* condensed poster face - echoes the cover type */
+  --font-heading: 'Space Grotesk', sans-serif;  /* labels, buttons, episode titles */
+  --font-body: 'Inter', sans-serif;             /* clean and readable at small sizes */
+}
+
+/* ===================== DERIVED VALUES - LEAVE ALONE ====================
+   Every colour below is mixed from the tokens. #fff and #000 appear only
+   as mixing endpoints (lightening / darkening), never as used colours. */
+:root {
+  --surface: var(--color-primary);
+  --surface-raised: color-mix(in srgb, var(--color-primary) 88%, #fff);
+  --border-subtle: color-mix(in srgb, var(--color-secondary) 25%, var(--color-bg));
+  --border-strong: color-mix(in srgb, var(--color-secondary) 45%, var(--color-bg));
+  --text-muted: color-mix(in srgb, var(--color-text) 55%, var(--color-secondary));
+  --accent-hover: color-mix(in srgb, var(--color-accent) 82%, #fff);
+  --accent-tint: color-mix(in srgb, var(--color-accent) 14%, var(--color-bg));
+  --accent-glow: color-mix(in srgb, var(--color-accent) 45%, transparent);
+  --footer-bg: color-mix(in srgb, var(--color-bg) 70%, #000);
+  --header-frost: color-mix(in srgb, var(--color-bg) 78%, transparent);
+  --player-bg: color-mix(in srgb, var(--color-primary) 92%, var(--color-accent));
+  --soundbar-color: color-mix(in srgb, var(--color-accent) 55%, var(--color-bg));
+  --shadow-soft: 0 8px 30px color-mix(in srgb, #000 45%, transparent);
+  --focus-ring: 2px solid var(--accent-hover);
+  --accent-alt-soft: color-mix(in srgb, var(--color-accent-alt) 85%, #fff);
+  --soundbar-alt: color-mix(in srgb, var(--color-accent-alt) 60%, var(--color-bg));
+}
+
+/* ===================== RESET + BASE ===================== */
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+html { scroll-behavior: smooth; }
+
+img { max-width: 100%; height: auto; display: block; }
+
+h1, h2, h3 {
+  line-height: 1.15;
+  margin: 0 0 0.5em;
+}
+
+/* h1 and h2 use the condensed poster face and are set in caps, echoing the
+   chunky blocked lettering on the cover art. h3 stays in Space Grotesk -
+   Anton at episode-title size would be hard to read at a glance. */
+h1, h2 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.005em;
+}
+
+h1 { font-size: clamp(3rem, 8vw, 5.5rem); line-height: 0.95; }
+h2 { font-size: clamp(1.9rem, 4.5vw, 3rem); line-height: 1; }
+
+h3 {
+  font-family: var(--font-heading);
+  font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+p { margin: 0 0 1em; }
+
+a { color: var(--accent-hover); }
+a:hover { color: var(--color-accent); }
+
+/* Anchor jumps must clear the sticky header; bigger value on mobile where
+   the stacked nav is taller (see the media query) */
+section[id] { scroll-margin-top: 90px; }
+
+/* ===================== ACCESSIBILITY BASICS ===================== */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  background: var(--color-accent);
+  color: var(--color-on-accent);
+  padding: 0.6rem 1rem;
+  border-radius: 0 0 8px 0;
+  z-index: 200;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.skip-link:focus { left: 0; }
+
+:focus-visible {
+  outline: var(--focus-ring);
+  outline-offset: 3px;
+}
+
+/* ===================== LAYOUT HELPERS ===================== */
+.section { padding: 4.5rem 1.5rem; }
+
+.section-inner,
+.header-inner,
+.hero-inner,
+.footer-inner {
+  max-width: 1080px;
+  margin: 0 auto;
+}
+
+.eyebrow {
+  font-family: var(--font-heading);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--accent-hover);
+  margin-bottom: 0.75rem;
+}
+
+/* ===================== BUTTONS ===================== */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--color-accent);
+  color: var(--color-on-accent);
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.2s ease, transform 0.15s ease;
+}
+
+.btn-primary:hover {
+  background: var(--accent-hover);
+  color: var(--color-on-accent);
+  transform: translateY(-1px);
+}
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: transparent;
+  color: var(--color-text);
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 0.75rem 1.5rem;
+  border: 1px solid var(--border-strong);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: border-color 0.2s ease;
+}
+
+.btn-ghost:hover { border-color: var(--color-accent); }
+
+/* ===================== 1. STICKY HEADER ===================== */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--header-frost);
+  /* Frosted glass: the translucent background above + this blur of
+     whatever scrolls behind it */
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.75rem 1.5rem;
+  flex-wrap: wrap;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  text-decoration: none;
+  color: var(--color-text);
+}
+
+.brand-logo { width: 36px; height: 36px; }
+
+.brand-name {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.site-nav {
+  display: flex;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.site-nav a {
+  color: var(--color-text);
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.site-nav a:hover { color: var(--accent-hover); }
+
+.social-row {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.social-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--accent-tint);
+  color: var(--color-text);
+  border: 1px solid var(--border-subtle);
+  text-decoration: none;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.social-btn:hover {
+  background: var(--color-accent);
+  color: var(--color-on-accent);
+}
+
+/* ===================== 2. HERO ===================== */
+.hero { padding: 4rem 1.5rem 4.5rem; }
+
+.hero-inner {
+  display: grid;
+  grid-template-columns: minmax(260px, 420px) 1fr;
+  gap: 3rem;
+  align-items: center;
+}
+
+.hero-art img {
+  border-radius: 16px;
+  /* The glow: a soft accent-coloured shadow that makes the art float */
+  box-shadow: 0 12px 60px var(--accent-glow), var(--shadow-soft);
+}
+
+.hero-pitch {
+  font-size: 1.25rem;
+  color: var(--text-muted);
+  max-width: 34ch;
+}
+
+.trust-strip {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  font-family: var(--font-heading);
+  letter-spacing: 0.02em;
+  margin: 1.25rem 0 1.75rem;
+}
+
+.trust-strip span { white-space: nowrap; }
+
+/* The listen-on row - flex-wrap means it never needs a media query */
+.listen-on-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.platform-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--surface-raised);
+  color: var(--color-text);
+  border: 1px solid var(--border-strong);
+  border-radius: 999px;
+  padding: 0.55rem 1.1rem;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-decoration: none;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.platform-btn:hover {
+  border-color: var(--color-accent);
+  background: var(--accent-tint);
+  color: var(--color-text);
+}
+
+.platform-btn i { color: var(--accent-hover); }
+
+/* Staggered rise-in for the hero, only when motion is welcome */
+@media (prefers-reduced-motion: no-preference) {
+  .hero .reveal {
+    opacity: 0;
+    transform: translateY(14px);
+    animation: hero-rise 0.6s ease forwards;
+  }
+  .hero-copy .reveal:nth-child(1) { animation-delay: 0.05s; }
+  .hero-copy .reveal:nth-child(2) { animation-delay: 0.12s; }
+  .hero-copy .reveal:nth-child(3) { animation-delay: 0.2s; }
+  .hero-copy .reveal:nth-child(4) { animation-delay: 0.28s; }
+  .hero-copy .reveal:nth-child(5) { animation-delay: 0.36s; }
+  @keyframes hero-rise {
+    to { opacity: 1; transform: none; }
+  }
+}
+
+/* ===================== SOUNDBAR MOTIF =====================
+   This kit's section divider: a row of thin vertical bars echoing an
+   audio waveform. Pure CSS - the spans get their heights below. The
+   gentle pulse animation only runs when the visitor is happy with
+   motion. Used between sections and nowhere louder. */
+.soundbar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  height: 56px;
+}
+
+.soundbar span {
+  width: 4px;
+  border-radius: 2px;
+  background: var(--soundbar-color);
+}
+
+/* Every third bar picks up the coral instead of the lime - the artwork's
+   two brights, used as punctuation rather than wallpaper */
+.soundbar span:nth-child(3n) { background: var(--soundbar-alt); }
+
+/* Varying heights - a fixed pattern so it looks like a waveform,
+   not a random mess */
+.soundbar span:nth-child(1)  { height: 10px; }
+.soundbar span:nth-child(2)  { height: 18px; }
+.soundbar span:nth-child(3)  { height: 26px; }
+.soundbar span:nth-child(4)  { height: 14px; }
+.soundbar span:nth-child(5)  { height: 32px; }
+.soundbar span:nth-child(6)  { height: 20px; }
+.soundbar span:nth-child(7)  { height: 36px; }
+.soundbar span:nth-child(8)  { height: 22px; }
+.soundbar span:nth-child(9)  { height: 30px; }
+.soundbar span:nth-child(10) { height: 12px; }
+.soundbar span:nth-child(11) { height: 24px; }
+.soundbar span:nth-child(12) { height: 16px; }
+.soundbar span:nth-child(13) { height: 28px; }
+.soundbar span:nth-child(14) { height: 10px; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .soundbar span {
+    animation: soundbar-pulse 2.6s ease-in-out infinite alternate;
+  }
+  .soundbar span:nth-child(odd)  { animation-delay: 0.4s; }
+  .soundbar span:nth-child(3n)   { animation-delay: 0.9s; }
+  @keyframes soundbar-pulse {
+    to { transform: scaleY(1.5); }
+  }
+}
+
+/* ===================== 3. LATEST EPISODE / PLAYER ===================== */
+.listen-section { padding-top: 3.5rem; }
+
+.player-card {
+  background: var(--player-bg);
+  border: 1px solid var(--border-strong);
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: var(--shadow-soft);
+}
+
+.player-epnum {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  color: var(--accent-alt-soft);
+  margin-bottom: 0.25rem;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.player-title { margin-bottom: 0.25rem; }
+
+.player-meta {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  margin-bottom: 0.75rem;
+}
+
+.player-desc { color: var(--text-muted); }
+
+/* The native audio element: the browser's own controls are deliberately
+   kept - they give keyboard and screen-reader support for free, which a
+   custom-built player would break. The wrapper card is what we style. */
+audio {
+  width: 100%;
+  margin-top: 0.5rem;
+}
+
+.player-alt {
+  margin: 1.25rem 0 0;
+  font-size: 0.95rem;
+  color: var(--text-muted);
+}
+
+/* Consent-gated embed container (only used in embed mode) */
+.embed-container { margin-top: 0.5rem; }
+
+.embed-placeholder {
+  border: 2px dashed var(--border-strong);
+  border-radius: 12px;
+  padding: 1.5rem;
+  text-align: center;
+  color: var(--text-muted);
+}
+
+.embed-container iframe {
+  width: 100%;
+  border: none;
+  border-radius: 12px;
+  min-height: 152px;
+}
+
+/* ===================== 4. EPISODE LIST ===================== */
+.episode-list {
+  list-style: none;
+  margin: 2rem 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* flex-wrap means rows collapse gracefully on narrow screens without
+   needing the media query - the pattern to copy for any future row */
+.episode-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  background: var(--surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 14px;
+  padding: 1.25rem;
+  transition: border-color 0.2s ease;
+}
+
+.episode-row:hover { border-color: var(--border-strong); }
+
+.episode-thumb {
+  width: 96px;
+  height: 96px;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 10px;
+  flex-shrink: 0;
+}
+
+.episode-body {
+  flex: 1;
+  min-width: 240px;
+}
+
+.episode-body h3 { margin-bottom: 0.2rem; }
+
+.episode-meta {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  margin-bottom: 0.4rem;
+}
+
+.episode-desc {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  margin-bottom: 0.75rem;
+}
+
+.episode-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.episode-listen {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: var(--accent-tint);
+  color: var(--accent-hover);
+  border: 1px solid var(--border-strong);
+  border-radius: 999px;
+  padding: 0.4rem 1rem;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.episode-listen:hover {
+  background: var(--color-accent);
+  color: var(--color-on-accent);
+}
+
+.episode-notes {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.episode-notes:hover { color: var(--accent-hover); }
+
+.full-archive {
+  margin-top: 2rem;
+  text-align: center;
+  color: var(--text-muted);
+}
+
+/* ===================== 5. START HERE ===================== */
+.start-here-section { padding-top: 3.5rem; }
+
+/* auto-fit: cards fill the row and stack by themselves - no media
+   query needed, and no mobile stacking bugs */
+.start-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.25rem;
+  margin-top: 2rem;
+}
+
+.start-card {
+  background: var(--surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 14px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+/* The Start Here labels get the coral and a solid block behind them,
+   borrowing the banner treatment from the cover art */
+.start-label {
+  display: inline-block;
+  align-self: flex-start;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-on-accent);
+  background: var(--accent-alt-soft);
+  padding: 0.25rem 0.6rem;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+}
+
+.start-card p { color: var(--text-muted); font-size: 0.95rem; }
+
+.start-listen {
+  margin-top: auto;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-decoration: none;
+}
+
+/* ===================== 6. ABOUT BAND ===================== */
+.about-band {
+  background: var(--surface);
+  border-top: 1px solid var(--border-subtle);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  gap: 3rem;
+  align-items: start;
+}
+
+/* min-width: 0 lets these grid children shrink below their content size,
+   preventing long unbroken text (URLs, email addresses) blowing the layout */
+.about-text,
+.contact-form-col { min-width: 0; }
+
+/* Used while there is no host photo - keeps the text from running to a
+   silly line length in a full-width band */
+.about-grid-textonly {
+  grid-template-columns: 1fr;
+  max-width: 62ch;
+}
+
+.about-photo img {
+  border-radius: 14px;
+  object-fit: cover;
+  box-shadow: var(--shadow-soft);
+}
+
+.support-strip {
+  margin-top: 3rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+  border-top: 1px solid var(--border-subtle);
+  padding-top: 2rem;
+}
+
+.support-label {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  margin: 0;
+}
+
+.support-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.support-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--surface-raised);
+  color: var(--color-text);
+  border: 1px solid var(--border-strong);
+  border-radius: 999px;
+  padding: 0.5rem 1.1rem;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-decoration: none;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.support-btn:hover {
+  border-color: var(--color-accent);
+  background: var(--accent-tint);
+}
+
+.support-btn i { color: var(--accent-hover); }
+
+/* ===================== 7. REVIEWS ===================== */
+.review-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.25rem;
+  margin-top: 2rem;
+}
+
+.review-card {
+  background: var(--surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 14px;
+  padding: 1.5rem;
+}
+
+.review-stars {
+  color: var(--color-accent);
+  margin-bottom: 0.75rem;
+  letter-spacing: 0.15em;
+}
+
+.review-quote {
+  font-style: italic;
+  color: var(--color-text);
+}
+
+.review-source {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+/* ===================== 8. CONTACT ===================== */
+.contact-band {
+  background: var(--surface);
+  border-top: 1px solid var(--border-subtle);
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  gap: 3rem;
+  align-items: start;
+}
+
+.form-field { margin-bottom: 1.1rem; }
+
+.form-field label {
+  display: block;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin-bottom: 0.35rem;
+}
+
+.form-field input,
+.form-field select,
+.form-field textarea {
+  width: 100%;
+  background: var(--color-bg);
+  color: var(--color-text);
+  border: 1px solid var(--border-strong);
+  border-radius: 10px;
+  padding: 0.7rem 0.9rem;
+  font-family: var(--font-body);
+  font-size: 1rem;
+}
+
+.form-field input:focus-visible,
+.form-field select:focus-visible,
+.form-field textarea:focus-visible {
+  outline: var(--focus-ring);
+  outline-offset: 1px;
+  border-color: var(--color-accent);
+}
+
+.form-field textarea { resize: vertical; }
+
+/* Honeypot: parked off-screen, not display:none - some bots skip
+   hidden fields */
+.hp-field {
+  position: absolute;
+  left: -9999px;
+}
+
+#form-status {
+  margin-top: 1rem;
+  font-weight: 600;
+  min-height: 1.5em;
+}
+
+#form-status.form-success { color: var(--accent-hover); }
+#form-status.form-error { color: color-mix(in srgb, var(--color-text) 70%, var(--color-accent)); }
+
+.contact-details-col h3 { margin-bottom: 1rem; }
+
+.contact-email-link {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.contact-details-col .social-row { margin: 1.25rem 0; }
+
+.media-kit-line,
+.newsletter-line { font-size: 0.95rem; }
+
+/* ===================== 9. FOOTER ===================== */
+.site-footer {
+  background: var(--footer-bg);
+  border-top: 1px solid var(--border-subtle);
+  padding: 3rem 1.5rem 2rem;
+  text-align: center;
+}
+
+.footer-brand {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.footer-inner .listen-on-row { justify-content: center; margin-bottom: 1.5rem; }
+
+.listen-on-compact .platform-btn {
+  padding: 0.4rem 0.9rem;
+  font-size: 0.8rem;
+}
+
+.footer-inner .social-row { justify-content: center; margin-bottom: 1.5rem; }
+
+.footer-legal {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+.footer-copy {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+.footer-copy a { color: var(--text-muted); }
+.footer-copy a:hover { color: var(--accent-hover); }
+
+/* ===================== 10. MOBILE LISTEN BAR =====================
+   Hidden on desktop; shown inside the mobile media query below. */
+.mobile-listen-bar { display: none; }
+
+/* ===================== 404 PAGE ===================== */
+.error-section {
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+}
+
+.error-inner { text-align: center; }
+
+/* ===================== 11. COOKIE BANNER ===================== */
+.cookie-banner {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 150;
+  background: var(--surface-raised);
+  border-top: 1px solid var(--border-strong);
+  padding: 1rem 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.cookie-banner[hidden] { display: none; }
+
+.cookie-banner p { margin: 0; font-size: 0.95rem; }
+
+.cookie-actions {
+  display: flex;
+  gap: 0.6rem;
+}
+
+/* ===================== SCROLL REVEAL =====================
+   JS adds .visible as elements enter the viewport. For reduced-motion
+   users the JS never runs, and this base state keeps everything
+   visible - nothing is hidden without the animation to reveal it. */
+@media (prefers-reduced-motion: no-preference) {
+  .reveal {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: none;
+  }
+  /* Hero reveals are handled by the load animation above, not scroll */
+  .hero .reveal { transition: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal { opacity: 1; transform: none; }
+  .soundbar span { animation: none; }
+}
+
+/* ===================== MOBILE - the one media query ===================
+   Episode rows, the review grid, the start grid and the listen-on row
+   deliberately do NOT appear here: flex-wrap and auto-fit handle
+   themselves. Only true layout flips live in this block. */
+@media (max-width: 700px) {
+  .header-inner {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+  }
+
+  .site-nav { justify-content: center; }
+
+  /* Stacked header is taller - anchor jumps need more clearance */
+  section[id] { scroll-margin-top: 160px; }
+
+  .hero-inner {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  /* Art first, capped so it does not swallow the screen */
+  .hero-art {
+    max-width: 300px;
+    margin: 0 auto;
+  }
+
+  .about-grid,
+  .contact-grid { grid-template-columns: 1fr; }
+
+  /* Show the fixed listen bar and reserve space for it */
+  .mobile-listen-bar {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 140;
+    background: var(--surface-raised);
+    border-top: 1px solid var(--border-strong);
+    padding: 0.6rem 1rem;
+    justify-content: center;
+    gap: 0.75rem;
+  }
+
+  body { padding-bottom: 76px; }
+
+  /* Lift the cookie banner clear of the listen bar so they never overlap */
+  .cookie-banner { bottom: 76px; }
+}
