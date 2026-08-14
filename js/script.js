@@ -211,7 +211,67 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   /* =====================================================================
-     5. COOKIE CONSENT + GATED EMBED LOADER
+     5. CLIP FACADES - click-to-play YouTube embeds
+     Each .clip-card shows only a static thumbnail image until clicked -
+     no YouTube script, no iframe, no cookies until that moment. This is
+     the same "don't load it until it's wanted" principle as the audio
+     player's preload="none".
+     Clicking a facade checks the SAME consent choice as the cookie
+     banner above. Already accepted -> load immediately. No choice yet,
+     or previously declined -> show the banner and remember which card
+     was clicked, so accepting loads that specific clip once.
+     Declining leaves the thumbnail as-is; the "Watch on YouTube" link
+     under every card always works, cookies or not.
+     ===================================================================== */
+  function loadClip(button) {
+    var wrap = button.closest('.clip-video-wrap');
+    var card = button.closest('.clip-card');
+    if (!wrap || !card) { return; }
+
+    var videoId = card.getAttribute('data-video-id');
+    var videoTitle = card.getAttribute('data-video-title') || 'YouTube video';
+    if (!videoId) { return; }
+
+    var iframe = document.createElement('iframe');
+    // youtube-nocookie.com is YouTube's privacy-enhanced embed domain -
+    // it still sets cookies once playback starts, but not before.
+    iframe.src = 'https://www.youtube-nocookie.com/embed/' + videoId + '?autoplay=1&rel=0';
+    iframe.title = videoTitle;
+    iframe.loading = 'lazy';
+    iframe.setAttribute('frameborder', '0');
+    iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
+    iframe.allowFullscreen = true;
+
+    wrap.innerHTML = '';
+    wrap.appendChild(iframe);
+  }
+
+  var clipFacades = document.querySelectorAll('.clip-facade');
+  var pendingClipButton = null;
+
+  clipFacades.forEach(function (facadeButton) {
+    facadeButton.addEventListener('click', function () {
+      var storedChoice = null;
+      try {
+        storedChoice = localStorage.getItem('on-air-cookie-consent');
+      } catch (e) {
+        // Private browsing can block localStorage; treat as no choice made
+      }
+
+      if (storedChoice === 'accepted') {
+        loadClip(facadeButton);
+      } else {
+        var banner = document.getElementById('cookie-banner');
+        if (banner) {
+          pendingClipButton = facadeButton;
+          banner.hidden = false;
+        }
+      }
+    });
+  });
+
+  /* =====================================================================
+     6. COOKIE CONSENT + GATED EMBED LOADER
      Only relevant in EMBED MODE (a third-party player iframe). The
      banner asks once; the choice lives in localStorage (a small
      browser-side store that survives page reloads) under a key unique
@@ -268,11 +328,16 @@ document.addEventListener('DOMContentLoaded', function () {
       try { localStorage.setItem(CONSENT_KEY, 'accepted'); } catch (e) { }
       cookieBanner.hidden = true;
       applyConsentChoice('accepted');
+      if (pendingClipButton) {
+        loadClip(pendingClipButton);
+        pendingClipButton = null;
+      }
     });
 
     declineButton.addEventListener('click', function () {
       try { localStorage.setItem(CONSENT_KEY, 'declined'); } catch (e) { }
       cookieBanner.hidden = true;
+      pendingClipButton = null;
     });
   }
 

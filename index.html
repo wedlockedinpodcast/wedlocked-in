@@ -46,6 +46,7 @@
         <a href="#listen">Listen</a>
         <a href="#episodes">Episodes</a>
         <a href="#start-here">Start here</a>
+        <a href="#clips">Clips</a>
         <a href="#about">About</a>
         <a href="#contact">Contact</a>
       </nav>
@@ -271,6 +272,83 @@
 
     <div class="soundbar" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
 
+    <!-- ============ CLIPS ============
+         Four top-performing YouTube Shorts. Nothing here loads until the
+         visitor presses play - each card shows a static thumbnail image
+         only (no YouTube script, no cookies) until clicked.
+
+         Pressing play triggers the cookie consent banner if no choice has
+         been made yet, or loads immediately if the visitor already
+         accepted. Declining leaves the thumbnail in place; the "Watch on
+         YouTube" link under every card always works regardless of choice.
+
+         The embed uses youtube-nocookie.com, YouTube's privacy-enhanced
+         domain - it still sets cookies once a video actually plays, which
+         is why this site has a cookie banner at all. See privacy.html.
+
+         To add a clip: copy one complete <div class="clip-card">...</div>
+         block, change data-video-id to the new video's ID (the part of
+         the URL after /shorts/), update the thumbnail src to match, and
+         write a caption. -->
+    <section class="section" id="clips">
+      <div class="section-inner">
+        <p class="eyebrow reveal">On TikTok and YouTube</p>
+        <h2 class="reveal">A few clips</h2>
+        <div class="clip-grid">
+
+          <!-- ===== ONE COMPLETE CLIP CARD - copy from here... ===== -->
+          <div class="clip-card reveal" data-video-id="piqhdZcVXIQ" data-video-title="Is it ok to go to slumber parties as a married woman?">
+            <div class="clip-video-wrap">
+              <button class="clip-facade" type="button" aria-label="Play clip: Is it ok to go to slumber parties as a married woman?">
+                <img src="https://i.ytimg.com/vi/piqhdZcVXIQ/hqdefault.jpg" alt="" loading="lazy" width="480" height="360">
+                <span class="clip-play-icon" aria-hidden="true"><i class="fa-solid fa-play"></i></span>
+              </button>
+            </div>
+            <p class="clip-caption">Is it ok to go to slumber parties as a married woman?</p>
+            <a class="clip-yt-link" href="https://www.youtube.com/shorts/piqhdZcVXIQ" rel="noopener">Watch on YouTube <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
+          </div>
+          <!-- ===== ...to here. That is one complete card. ===== -->
+
+          <div class="clip-card reveal" data-video-id="0MbhoaM6uto" data-video-title="What your consequences for cheating would be">
+            <div class="clip-video-wrap">
+              <button class="clip-facade" type="button" aria-label="Play clip: What your consequences for cheating would be">
+                <img src="https://i.ytimg.com/vi/0MbhoaM6uto/hqdefault.jpg" alt="" loading="lazy" width="480" height="360">
+                <span class="clip-play-icon" aria-hidden="true"><i class="fa-solid fa-play"></i></span>
+              </button>
+            </div>
+            <p class="clip-caption">What your consequences for cheating would be...</p>
+            <a class="clip-yt-link" href="https://www.youtube.com/shorts/0MbhoaM6uto" rel="noopener">Watch on YouTube <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
+          </div>
+
+          <div class="clip-card reveal" data-video-id="xCdrTKBQjas" data-video-title="AITA for not attending my brother and sister's wedding?">
+            <div class="clip-video-wrap">
+              <button class="clip-facade" type="button" aria-label="Play clip: AITA for not attending my brother and sister's wedding?">
+                <img src="https://i.ytimg.com/vi/xCdrTKBQjas/hqdefault.jpg" alt="" loading="lazy" width="480" height="360">
+                <span class="clip-play-icon" aria-hidden="true"><i class="fa-solid fa-play"></i></span>
+              </button>
+            </div>
+            <p class="clip-caption">AITA for not attending my brother &amp; sister's wedding!?</p>
+            <a class="clip-yt-link" href="https://www.youtube.com/shorts/xCdrTKBQjas" rel="noopener">Watch on YouTube <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
+          </div>
+
+          <div class="clip-card reveal" data-video-id="8VI972Vuhrs" data-video-title="AITA for dating my daughter's maid of honour?">
+            <div class="clip-video-wrap">
+              <button class="clip-facade" type="button" aria-label="Play clip: AITA for dating my daughter's maid of honour?">
+                <img src="https://i.ytimg.com/vi/8VI972Vuhrs/hqdefault.jpg" alt="" loading="lazy" width="480" height="360">
+                <span class="clip-play-icon" aria-hidden="true"><i class="fa-solid fa-play"></i></span>
+              </button>
+            </div>
+            <p class="clip-caption">AITA for dating my daughter's Maid of Honour?</p>
+            <a class="clip-yt-link" href="https://www.youtube.com/shorts/8VI972Vuhrs" rel="noopener">Watch on YouTube <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i></a>
+          </div>
+
+        </div>
+        <p class="full-archive reveal">More where that came from on <a href="https://www.tiktok.com/@wedlocked.in.podcast" rel="noopener">TikTok</a> and <a href="https://www.youtube.com/@WedlockedInPod" rel="noopener">YouTube</a>.</p>
+      </div>
+    </section>
+
+    <div class="soundbar" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+
     <!-- ============ ABOUT ============
          DRAFT COPY - written from the feed description and the episodes,
          not supplied by you. Read it and rewrite anything that is not true.
@@ -382,7 +460,7 @@
         <a class="social-btn" href="https://www.tiktok.com/@wedlocked.in.podcast" rel="noopener" aria-label="TikTok"><i class="fa-brands fa-tiktok" aria-hidden="true"></i></a>
       </div>
 
-      <p class="footer-copy">&copy; <span id="footer-year">2026</span> Wedlocked In. <a href="privacy.html">Privacy</a></p>
+      <p class="footer-copy">&copy; <span id="footer-year">2026</span> Wedlocked In. <a href="privacy.html">Privacy</a> &middot; <a href="#" id="cookie-settings-link">Cookie settings</a></p>
     </div>
   </footer>
 
@@ -392,6 +470,17 @@
   <div class="mobile-listen-bar">
     <a class="btn-primary" href="#listen"><i class="fa-solid fa-play" aria-hidden="true"></i> Listen now</a>
     <a class="platform-btn" href="https://open.spotify.com/show/6NbphaKHUdIZO1x6evVEIi" rel="noopener"><i class="fa-brands fa-spotify" aria-hidden="true"></i><span>Spotify</span></a>
+  </div>
+
+  <!-- ============ COOKIE BANNER ============
+       Only appears when someone presses play on a clip and hasn't made a
+       choice yet - not shown on page load. See js/script.js. -->
+  <div class="cookie-banner" id="cookie-banner" hidden>
+    <p>Playing a clip loads a video from YouTube, which sets cookies once playback starts. Okay to load it?</p>
+    <div class="cookie-actions">
+      <button type="button" class="btn-primary" id="cookie-accept">Accept</button>
+      <button type="button" class="btn-ghost" id="cookie-decline">Decline</button>
+    </div>
   </div>
 
   <script src="js/script.js"></script>

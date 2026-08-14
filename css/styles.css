@@ -831,6 +831,108 @@ audio {
    Hidden on desktop; shown inside the mobile media query below. */
 .mobile-listen-bar { display: none; }
 
+/* ===================== CLIPS ===================== */
+.clip-grid {
+  display: grid;
+  /* Same auto-fit pattern as start-grid and review-grid - cards fill the
+     row and wrap themselves, no mobile-stacking media query needed */
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.25rem;
+  margin-top: 2rem;
+}
+
+.clip-card {
+  background: var(--surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 14px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 9:16 keeps the box the right shape for a Short before anything has
+   loaded, so the page never jumps once a thumbnail image arrives */
+.clip-video-wrap {
+  position: relative;
+  aspect-ratio: 9 / 16;
+  background: #000;
+}
+
+.clip-video-wrap iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.clip-facade {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  cursor: pointer;
+  background: none;
+  display: block;
+}
+
+.clip-facade img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Darkens the lower part of the thumbnail so the play icon and any
+   future caption overlay stay readable against a bright frame */
+.clip-facade::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, color-mix(in srgb, #000 55%, transparent), transparent 45%);
+}
+
+.clip-play-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--color-accent) 90%, transparent);
+  color: var(--color-on-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+  transition: transform 0.15s ease;
+}
+
+.clip-facade:hover .clip-play-icon,
+.clip-facade:focus-visible .clip-play-icon {
+  transform: translate(-50%, -50%) scale(1.08);
+}
+
+.clip-caption {
+  padding: 0.9rem 1rem 0.3rem;
+  font-size: 0.95rem;
+  color: var(--color-text);
+  margin: 0;
+}
+
+.clip-yt-link {
+  display: block;
+  padding: 0.3rem 1rem 1rem;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.clip-yt-link:hover { color: var(--accent-hover); }
+
 /* ===================== 404 PAGE ===================== */
 .error-section {
   min-height: 80vh;
